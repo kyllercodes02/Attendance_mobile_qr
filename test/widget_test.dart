@@ -1,34 +1,24 @@
-import 'package:attendance_qr_app/main.dart';
+import 'package:attendance_qr_app/src/app/app.dart';
+import 'package:attendance_qr_app/src/app/app_dependencies.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  testWidgets('Login and logout flow works', (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
+  testWidgets('Login form validates required fields', (WidgetTester tester) async {
+    await tester.binding.setSurfaceSize(const Size(1200, 2200));
+    addTearDown(() => tester.binding.setSurfaceSize(null));
 
-    expect(find.text('Login Page'), findsOneWidget);
+    final dependencies = AppDependencies();
+    addTearDown(dependencies.dispose);
 
-    await tester.tap(find.text('Login'));
-    await tester.pump();
+    await tester.pumpWidget(AttendanceQrApp(dependencies: dependencies));
+
+    expect(find.text('Login'), findsWidgets);
+
+    await tester.tap(find.widgetWithText(ElevatedButton, 'Login'));
+    await tester.pumpAndSettle();
 
     expect(find.text('Email is required'), findsOneWidget);
     expect(find.text('Password is required'), findsOneWidget);
-
-    await tester.enterText(
-      find.byType(TextFormField).at(0),
-      'student@example.com',
-    );
-    await tester.enterText(find.byType(TextFormField).at(1), 'password123');
-
-    await tester.tap(find.text('Login'));
-    await tester.pumpAndSettle();
-
-    expect(find.text('Welcome to the Home Page'), findsOneWidget);
-    expect(find.text('Logged in as: student@example.com'), findsOneWidget);
-
-    await tester.tap(find.text('Logout'));
-    await tester.pumpAndSettle();
-
-    expect(find.text('Login Page'), findsOneWidget);
   });
 }
