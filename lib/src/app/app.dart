@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../features/attendance/data/services/attendance_api_http_service.dart';
+import '../features/attendance/data/services/teacher_dashboard_api_service.dart';
 import '../features/auth/presentation/controllers/auth_controller.dart';
 import 'app_dependencies.dart';
 import 'router/app_router.dart';
@@ -39,6 +40,9 @@ class _AttendanceQrAppState extends State<AttendanceQrApp> {
         ),
         Provider<AttendanceApiHttpService>.value(
           value: widget.dependencies.attendanceApiHttpService,
+        ),
+        Provider<TeacherDashboardApiService>.value(
+          value: widget.dependencies.teacherDashboardApiService,
         ),
       ],
       child: MaterialApp.router(

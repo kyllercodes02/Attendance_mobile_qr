@@ -40,7 +40,7 @@ class UnauthorizedPage extends StatelessWidget {
                           return;
                         }
                         if (authController.isTeacher) {
-                          context.go('/teacher/scanner');
+                          context.go('/teacher/dashboard');
                           return;
                         }
                         context.go('/login');

@@ -79,7 +79,7 @@ class _LoginPageState extends State<LoginPage> {
     }
 
     if (authController.isTeacher) {
-      context.go('/teacher/scanner');
+      context.go('/teacher/dashboard');
       return;
     }
 
@@ -104,10 +104,10 @@ class _LoginPageState extends State<LoginPage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/logo.png', width: 120, height: 120),
-                const SizedBox(height: 24),
+                Image.asset('assets/logo.png', width: 100, height: 100),
+                const SizedBox(height: 20),
                 const Text(
-                  'SCHOOL ATTENDANCE',
+                  'ZION ACADEMY ATTENDANCE',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 32,
@@ -122,11 +122,6 @@ class _LoginPageState extends State<LoginPage> {
                   style: TextStyle(fontSize: 16, color: Colors.white70),
                 ),
                 const SizedBox(height: 20),
-                Text(
-                  'API: ${AppConfig.apiBaseUrl}',
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(fontSize: 12, color: Colors.white70),
-                ),
               ],
             ),
           ),
@@ -197,7 +192,9 @@ class _LoginPageState extends State<LoginPage> {
                       setState(() => _obscurePassword = !_obscurePassword);
                     },
                     icon: Icon(
-                      _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                      _obscurePassword
+                          ? Icons.visibility
+                          : Icons.visibility_off,
                     ),
                   ),
                   border: OutlineInputBorder(

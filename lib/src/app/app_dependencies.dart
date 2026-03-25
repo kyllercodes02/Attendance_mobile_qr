@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 
 import '../core/config/app_config.dart';
 import '../features/attendance/data/services/attendance_api_http_service.dart';
+import '../features/attendance/data/services/teacher_dashboard_api_service.dart';
 import '../features/auth/data/datasources/auth_secure_storage.dart';
 import '../features/auth/data/services/auth_api_service.dart';
 import '../features/auth/presentation/controllers/auth_controller.dart';
@@ -27,6 +28,11 @@ class AppDependencies {
       baseUrl: AppConfig.apiBaseUrl,
       httpClient: _httpClient,
     );
+
+    teacherDashboardApiService = TeacherDashboardApiService(
+      baseUrl: AppConfig.apiBaseUrl,
+      httpClient: _httpClient,
+    );
   }
 
   final http.Client _httpClient;
@@ -34,6 +40,7 @@ class AppDependencies {
 
   late final AuthController authController;
   late final AttendanceApiHttpService attendanceApiHttpService;
+  late final TeacherDashboardApiService teacherDashboardApiService;
 
   void dispose() {
     authController.dispose();
